@@ -1,14 +1,40 @@
+// Event: Reserve Table Button
 function reserveTable() {
-    alert('Table reserved successfully! We look forward to welcoming you at Ajax.');
+    alert("Thank you for choosing Ajax! Our team will contact you soon to confirm your reservation.");
 }
 
-document.getElementById('contact-form').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevent page reload
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+// Event: Contact Form Submission
+document.addEventListener("DOMContentLoaded", () => {
+    const contactForm = document.getElementById("contact-form");
 
-    alert(`Thank you, ${name}, for reaching out to Ajax! We'll respond to your query at ${email} soon.`);
-    // Clear form
-    this.reset();
+    if (contactForm) {
+        contactForm.addEventListener("submit", (e) => {
+            e.preventDefault(); // Prevent default form submission
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            if (name && email && message) {
+                alert(
+                    `Thank you, ${name}! Your message has been received. We'll get back to you at ${email}.`
+                );
+                contactForm.reset(); // Clear the form fields
+            } else {
+                alert("Please fill out all fields before submitting.");
+            }
+        });
+    }
+});
+
+// Event: Highlight Active Page in Navigation
+document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const currentPath = window.location.pathname.split("/").pop();
+
+    navLinks.forEach((link) => {
+        if (link.getAttribute("href") === currentPath) {
+            link.style.color = "#f0c14b"; // Highlight the current page link
+            link.style.fontWeight = "bold";
+        }
+    });
 });
